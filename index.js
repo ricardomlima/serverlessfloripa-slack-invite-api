@@ -1,18 +1,18 @@
 'use strict';
 
-const got = require('got');
+const request = require('request');
 
 exports.handleInviteRequest = (req, res) => {
   var email = req.body.email;
-  var url = 'https://slack.com/api/users.admin.invite';
-  var slackToken = 'uc1gsvagA4gSsnC1bEFUwrEg';
-  var formData = JSON.stringify({email: email, token: slackToken});
-  var headers = {'Content-Type':'application/x-www-form-urlencoded'};
+  var url = 'https://serverlessfloripa.slack.com/api/users.admin.invite';
+  var slackToken = 'xoxp-416775999249-416776000641-441300168931-a2d7deee1de644df437fb3f3be670b0a';
+  var formData = {email: email, token: slackToken, set_active:true};
 
-  (async () => {
-    const myresponse = await got.post(url, {body:formData, headers:headers});
-    res.status(200).send(myresponse.body);
-  })();
-
+  request.post({
+    url: url,
+    form: formData
+  }, function(err, httpResponse, body){
+    res.status(200).send(body);
+  });
 };
 
