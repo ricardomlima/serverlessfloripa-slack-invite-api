@@ -5,7 +5,7 @@ const url = 'https://serverlessfloripa.slack.com';
 
 exports.handleInviteRequest = (req, res) => {
   var email = req.body.email;
-  var slackToken = 'xoxp-416775999249-416776000641-441300168931-a2d7deee1de644df437fb3f3be670b0a';
+  var slackToken = process.env.SLACK_TOKEN;
   var formData = {email: email, token: slackToken, set_active:true};
   var inviteEndpoint = url + '/api/users.admin.invite';
 
