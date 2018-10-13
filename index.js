@@ -1,12 +1,13 @@
 'use strict';
+const cors = require('cors');
 
 const request = require('request');
 const url = 'https://serverlessfloripa.slack.com';
 const inviteEndpoint = url + '/api/users.admin.invite';
 const slackToken = process.env.SLACK_TOKEN;
 
-exports.handleInviteRequest = (req, res) => {
-  const requestBody = JSON.parse(req.body);
+const handleInvite = (req, res) => {
+  const requestBody = req.body;
   const email = requestBody.email;
   const formData = {email: email, token: slackToken, set_active:true};
 
@@ -30,6 +31,13 @@ exports.handleInviteRequest = (req, res) => {
       }
       res.status(400).send(errorMsg);
     }
+  });
+};
+
+exports.handleInviteRequest = (req, res) => {
+  const corsFn = cors();
+  corsFn(req, res, function() {
+    handleInvite(req, res);
   });
 };
 
