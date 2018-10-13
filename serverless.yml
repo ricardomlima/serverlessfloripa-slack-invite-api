@@ -21,6 +21,8 @@ package:
 functions:
   slack-invite:
     handler: handleInviteRequest
+    environment:
+      - SLACK_TOKEN: ${env:SLACK_TOKEN}
     events:
       - http: path
 
