@@ -25,7 +25,7 @@ const handleInvite = (req, res) => {
       if (error === 'already_invited'){
         errorMsg = 'You were already invited! check your e-mail.';
       } else if (error === 'already_in_team'){
-        errorMsg = 'You are already part of our Slack channel. Visit '+ url;
+        errorMsg = 'You are already part of our Slack channel. Visit <a href="'+url+'">'+ url+ '</a>';
       } else if (error === 'invalid_email'){
         errorMsg = 'Please type a valid email :) ';
       }
